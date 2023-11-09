@@ -1,10 +1,7 @@
-<template>
-</template>
+<template></template>
 
 <script setup>
+const test = 'a';
 </script>
 
-
-<style scoped>
-
-</style>
+<style scoped></style>
