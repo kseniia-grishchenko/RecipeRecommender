@@ -1,17 +1,5 @@
-/* color palette from <https://github.com/vuejs/theme> */
 :root {
-}
-
-/* semantic color variables for this project */
-:root {
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  font-weight: normal;
+  --main-bg: #ffd95a;
 }
 
 body {
@@ -30,4 +18,5 @@ body {
     'Helvetica Neue',
     sans-serif;
   font-size: 15px;
+  margin: 0;
 }
