@@ -7,5 +7,4 @@ class RecipeExchange(models.Model):
     receiver = models.ForeignKey(UserProfile, related_name='receiver', on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     message = models.TextField()
-    # Додайте інші поля за необхідності
 
