@@ -10,14 +10,19 @@
           <div class="shadow-layer"></div>
         </div>
         <sign-up></sign-up>
+        <sign-in></sign-in>
       </el-main>
-      <el-footer>Footer</el-footer>
+      <el-footer>
+        <footer-comp></footer-comp>
+      </el-footer>
     </el-container>
   </div>
 </template>
 
 <script>
+import SignIn from './SignIn/SignIn.vue';
 import SignUp from './SignUp/SignUp.vue';
+import FooterComp from './components/FooterComp.vue';
 import HeaderComp from './components/HeaderComp.vue';
 
 export default {
@@ -26,7 +31,9 @@ export default {
   }),
   components: {
     HeaderComp,
-    SignUp
+    SignUp,
+    FooterComp,
+    SignIn
   }
 };
 </script>
@@ -34,6 +41,11 @@ export default {
 <style>
 .el-header {
   border-top: 12px solid var(--main-bg);
+}
+.el-footer {
+  height: auto;
+  padding: 12px 20px;
+  background-color: var(--main-bg);
 }
 
 .banner-wrapper {
@@ -59,6 +71,18 @@ export default {
   color: var(--main-bg);
 }
 .el-link.is-underline:hover:after {
+  border-color: var(--main-bg);
+}
+
+.el-button:focus,
+.el-button:hover {
+  color: var(--main-bg);
+  border-color: var(--main-bg);
+  background-color: initial;
+  outline: 0;
+}
+.el-button--primary {
+  background-color: var(--main-bg);
   border-color: var(--main-bg);
 }
 </style>
