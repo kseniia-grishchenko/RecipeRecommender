@@ -7,4 +7,4 @@ class RecipeRating(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     rating = models.PositiveIntegerField()
     comment = models.TextField()
-    # Додайте інші поля за необхідності
+    
