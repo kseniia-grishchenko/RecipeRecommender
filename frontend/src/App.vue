@@ -9,6 +9,7 @@
           <el-image src="default_banner.png"></el-image>
           <div class="shadow-layer"></div>
         </div>
+        <sign-up></sign-up>
       </el-main>
       <el-footer>Footer</el-footer>
     </el-container>
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+import SignUp from './SignUp/SignUp.vue';
 import HeaderComp from './components/HeaderComp.vue';
 
 export default {
@@ -23,12 +25,13 @@ export default {
     loggedIn: false
   }),
   components: {
-    HeaderComp
+    HeaderComp,
+    SignUp
   }
 };
 </script>
 
-<style scoped>
+<style>
 .el-header {
   border-top: 12px solid var(--main-bg);
 }
@@ -47,5 +50,15 @@ export default {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 50%);
+}
+
+.el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px var(--main-bg);
+}
+.el-link:hover {
+  color: var(--main-bg);
+}
+.el-link.is-underline:hover:after {
+  border-color: var(--main-bg);
 }
 </style>
