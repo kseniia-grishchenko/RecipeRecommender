@@ -7,5 +7,5 @@ class Recipe(models.Model):
     ingredients = models.TextField()
     instructions = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    # Додайте інші поля за необхідності
+   
 
