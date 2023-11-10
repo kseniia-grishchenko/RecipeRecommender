@@ -10,7 +10,7 @@
       <el-link>Profile</el-link>
     </div>
     <div class="action-section">
-      <el-icon><Star /></el-icon>
+      <el-icon v-if="loggedIn"><Star /></el-icon>
       <el-input
         v-model="input2"
         class="search-bar"
@@ -22,7 +22,16 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  props: {
+    loggedIn: {
+      type: Boolean,
+      default: false
+    }
+  }
+};
+</script>
 
 <style scoped>
 .header {
