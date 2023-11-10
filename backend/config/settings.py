@@ -35,6 +35,12 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    "User_profile.apps.UserProfileConfig",
+    "Recipes.apps.RecipesConfig",
+    "Favorite_Recipe.apps.FavoriterecipeConfig",
+    "Ingredient.apps.IngredientConfig",
+    "Recipe_Rating.apps.RecipeRatingConfig",
+    "Recipe_Exchanges.apps.RecipeExchangesConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
