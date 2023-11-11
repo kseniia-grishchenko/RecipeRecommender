@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import SignIn from './SignIn/SignIn.vue';
-import SignUp from './SignUp/SignUp.vue';
+import SignIn from './views/SignIn.vue';
+import SignUp from './views/SignUp.vue';
 import FooterComp from './components/FooterComp.vue';
 import HeaderComp from './components/HeaderComp.vue';
 
