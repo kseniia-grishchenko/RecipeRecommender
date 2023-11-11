@@ -37,8 +37,7 @@ export default {
   },
   methods: {
     hashChangeHandler() {
-      // this.active = location.hash.match('sign-in');
-      this.active = true;
+      this.active = location.hash.match('sign-in');
     },
     openEmailModal() {
       ElMessageBox.prompt('Please input your e-mail', {
