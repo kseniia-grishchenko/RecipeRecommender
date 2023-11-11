@@ -5,10 +5,7 @@
         <header-comp :loggedIn="loggedIn"></header-comp>
       </el-header>
       <el-main>
-        <div class="banner">
-          <el-image src="default_banner.png"></el-image>
-          <div class="shadow-layer"></div>
-        </div>
+        <page-banner></page-banner>
         <sign-up></sign-up>
         <sign-in></sign-in>
       </el-main>
@@ -24,6 +21,7 @@ import SignIn from './views/SignIn.vue';
 import SignUp from './views/SignUp.vue';
 import FooterComp from './components/FooterComp.vue';
 import HeaderComp from './components/HeaderComp.vue';
+import PageBanner from './components/PageBanner.vue';
 
 export default {
   data: () => ({
@@ -33,7 +31,7 @@ export default {
     HeaderComp,
     SignUp,
     FooterComp,
-    SignIn
+    PageBanner
   }
 };
 </script>
@@ -46,22 +44,6 @@ export default {
   height: auto;
   padding: 12px 20px;
   background-color: var(--main-bg);
-}
-
-.banner-wrapper {
-  background: rgba(0, 0, 0, 50%);
-}
-.banner {
-  margin: 0 -20px;
-  position: relative;
-}
-.shadow-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 50%);
 }
 
 .el-input__wrapper.is-focus {
