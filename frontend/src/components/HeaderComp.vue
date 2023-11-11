@@ -5,9 +5,9 @@
       <span>RecipeRec</span>
     </div>
     <div class="sections">
-      <el-link>Home</el-link>
-      <el-link>Recipes</el-link>
-      <el-link>Profile</el-link>
+      <el-link href="#/">Home</el-link>
+      <el-link href="#/recipes">Recipes</el-link>
+      <el-link href="#/profile">Profile</el-link>
     </div>
     <div class="action-section">
       <el-icon v-if="loggedIn"><Star /></el-icon>
