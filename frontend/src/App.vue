@@ -8,6 +8,8 @@
         <page-banner></page-banner>
         <sign-up></sign-up>
         <sign-in></sign-in>
+        <home-page></home-page>
+        <recipe-list></recipe-list>
       </el-main>
       <el-footer>
         <footer-comp></footer-comp>
@@ -21,6 +23,8 @@ import SignIn from './views/SignIn.vue';
 import SignUp from './views/SignUp.vue';
 import FooterComp from './components/FooterComp.vue';
 import HeaderComp from './components/HeaderComp.vue';
+import RecipeList from './views/RecipeList.vue';
+import HomePage from './views/HomePage.vue';
 import PageBanner from './components/PageBanner.vue';
 
 export default {
@@ -31,6 +35,9 @@ export default {
     HeaderComp,
     SignUp,
     FooterComp,
+    SignIn,
+    RecipeList,
+    HomePage,
     PageBanner
   }
 };
