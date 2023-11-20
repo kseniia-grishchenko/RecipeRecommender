@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
+from .views import add_rating
+
 
 urlpatterns = [
-    path('add_rating/<int:recipe_id>/', views.add_rating, name='add_rating'),
+    path('<int:recipe_id>/', add_rating, name='add_rating'),
 ]
-

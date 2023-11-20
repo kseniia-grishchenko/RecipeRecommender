@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 
     "user",
     "recipe",
-    "favourites",
+    "favorites",
     "ingredient",
     "recipe_rating",
     "recipe_exchange",
