@@ -35,12 +35,6 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    "User_profile.apps.UserProfileConfig",
-    "Recipes.apps.RecipesConfig",
-    "Favorite_Recipe.apps.FavoriterecipeConfig",
-    "Ingredient.apps.IngredientConfig",
-    "Recipe_Rating.apps.RecipeRatingConfig",
-    "Recipe_Exchanges.apps.RecipeExchangesConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,6 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "rest_framework",
+
+    "user",
+    "recipe",
+    "favorites",
+    "ingredient",
+    "recipe_rating",
+    "recipe_exchange",
 ]
 
 MIDDLEWARE = [
