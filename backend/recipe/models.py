@@ -7,5 +7,6 @@ class Recipe(models.Model):
     ingredients = models.TextField()
     instructions = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-   
 
+    def __str__(self) -> str:
+        return self.title
