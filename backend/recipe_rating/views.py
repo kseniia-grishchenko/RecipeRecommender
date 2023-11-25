@@ -1,15 +1,18 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import RecipeRating, Recipe
-from django.contrib.auth.models import User
+from rest_framework import generics, permissions
+from .models import RecipeRating
+from .serializers import RecipeRatingSerializer
 
 
-def add_rating(request, recipe_id):
-    user_profile = User.objects.get(user=request.user)
-    recipe = get_object_or_404(Recipe, pk=recipe_id)
+class RecipeRatingListCreateView(generics.ListCreateAPIView):
+    queryset = RecipeRating.objects.all()
+    serializer_class = RecipeRatingSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
-    if request.method == 'POST':
-        rating = request.POST.get('rating')
-        comment = request.POST.get('comment')
-        RecipeRating.objects.create(user_profile=user_profile, recipe=recipe, rating=rating, comment=comment)
+    def perform_create(self, serializer):
+        serializer.save(user_profile=self.request.user)
 
-    return redirect('recipe_detail.html', recipe_id=recipe_id)
+
+class RecipeRatingRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = RecipeRating.objects.all()
+    serializer_class = RecipeRatingSerializer
+    permission_classes = [permissions.IsAuthenticated]

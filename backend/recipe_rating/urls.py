@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import add_rating
+from .views import RecipeRatingListCreateView, RecipeRatingRetrieveUpdateDestroyView
 
 
 urlpatterns = [
-    path('<int:recipe_id>/', add_rating, name='add_rating'),
+    path('recipe-ratings/', RecipeRatingListCreateView.as_view(), name='recipe-rating-list-create'),
+    path('recipe-ratings/<int:pk>/', RecipeRatingRetrieveUpdateDestroyView.as_view(), name='recipe-rating-retrieve-update-destroy'),
 ]
