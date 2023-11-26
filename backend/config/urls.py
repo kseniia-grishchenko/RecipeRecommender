@@ -31,7 +31,6 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
-    path("user_profile/", include("user.urls")),
     path("recipes/", include("recipe.urls")),
     path("favorites/", include("favorites.urls")),
     path("ingredient/", include("ingredient.urls")),

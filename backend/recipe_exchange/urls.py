@@ -3,6 +3,6 @@ from .views import RecipeExchangeListCreateView, RecipeExchangeRetrieveUpdateDes
 
 
 urlpatterns = [
-    path('recipe-exchanges/', RecipeExchangeListCreateView.as_view(), name='recipe-exchange-list-create'),
-    path('recipe-exchanges/<int:pk>/', RecipeExchangeRetrieveUpdateDestroyView.as_view(), name='recipe-exchange-retrieve-update-destroy'),
+    path('', RecipeExchangeListCreateView.as_view(), name='recipe-exchange-list-create'),
+    path('<int:pk>/', RecipeExchangeRetrieveUpdateDestroyView.as_view(), name='recipe-exchange-retrieve-update-destroy'),
 ]

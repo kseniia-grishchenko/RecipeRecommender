@@ -3,5 +3,5 @@ from .views import FavoriteRecipeListCreateView
 
 
 urlpatterns = [
-    path('favorite-recipes/', FavoriteRecipeListCreateView.as_view(), name='favorite-recipe-list-create'),
+    path('', FavoriteRecipeListCreateView.as_view(), name='favorite-recipe-list-create'),
 ]

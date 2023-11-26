@@ -3,6 +3,6 @@ from .views import RecipeRatingListCreateView, RecipeRatingRetrieveUpdateDestroy
 
 
 urlpatterns = [
-    path('recipe-ratings/', RecipeRatingListCreateView.as_view(), name='recipe-rating-list-create'),
-    path('recipe-ratings/<int:pk>/', RecipeRatingRetrieveUpdateDestroyView.as_view(), name='recipe-rating-retrieve-update-destroy'),
+    path('', RecipeRatingListCreateView.as_view(), name='recipe-rating-list-create'),
+    path('<int:pk>/', RecipeRatingRetrieveUpdateDestroyView.as_view(), name='recipe-rating-retrieve-update-destroy'),
 ]
