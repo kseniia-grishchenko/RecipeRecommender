@@ -24,12 +24,3 @@ class FavoriteRecipeListCreateView(generics.ListCreateAPIView):
         serializer.save(user=request.user)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-
-class UserFavoriteRecipeListView(generics.ListAPIView):
-    queryset = FavoriteRecipe.objects.all()
-    serializer_class = FavoriteRecipeSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return FavoriteRecipe.objects.filter(user=self.kwargs['user_id'])
