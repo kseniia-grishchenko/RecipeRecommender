@@ -68,10 +68,7 @@ export default {
           refresh: localStorage.getItem('refresh')
         });
 
-        const { access, refresh } = data;
-
-        localStorage.setItem('access', access);
-        localStorage.setItem('refresh', refresh);
+        localStorage.setItem('access', data.access);
         this.logIn();
       } catch (err) {
         console.error(err.response.data);
