@@ -13,7 +13,7 @@
     <div class="content">
       <h2 class="title">{{ recipe.title }}</h2>
       <p class="description">{{ recipe.description }}</p>
-      <button class="more-button">More...</button>
+      <button class="more-button" @click="$emit('expand-recipe', recipe.id)">More...</button>
     </div>
   </div>
 </template>
