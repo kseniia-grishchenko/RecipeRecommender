@@ -62,6 +62,7 @@ export default {
     async toggleFavorite() {
       try {
         const response = await postRequest('/api/favorites/', { recipe: this.recipe.id });
+
         if (response.status === 201) {
           this.isFavorite = true;
           this.$notify({
