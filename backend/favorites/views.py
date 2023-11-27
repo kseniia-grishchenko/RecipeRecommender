@@ -1,24 +1,26 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import FavoriteRecipe, Recipe
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from rest_framework import generics, status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from .models import FavoriteRecipe
+from .serializers import FavoriteRecipeSerializer
 
 
-@login_required
-def favorite_recipes(request):
-    user_profile = User.objects.get(user=request.user)
-    favorites = FavoriteRecipe.objects.filter(user=user_profile)
-    # TODO make an API views
-    return render(request, 'favorite_recipes.html', {'favorites': favorites})
+class FavoriteRecipeListCreateView(generics.ListCreateAPIView):
+    queryset = FavoriteRecipe.objects.all()
+    serializer_class = FavoriteRecipeSerializer
+    permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        return FavoriteRecipe.objects.filter(user=self.request.user)
 
-@login_required
-def add_to_favorites(request, recipe_id):
-    user_profile = User.objects.get(user=request.user)
-    recipe = get_object_or_404(Recipe, pk=recipe_id)
+    def create(self, request, *args, **kwargs):
+        existing_favorite = FavoriteRecipe.objects.filter(user=request.user, recipe=request.data.get('recipe'))
+        if existing_favorite.exists():
+            existing_favorite.delete()
+            return Response({'message': 'Рецепт видалено зі списку улюблених'}, status=status.HTTP_204_NO_CONTENT)
 
-    if not FavoriteRecipe.objects.filter(user_profile=user_profile, recipe=recipe).exists():
-        FavoriteRecipe.objects.create(user_profile=user_profile, recipe=recipe)
-
-# Todo what is this???
-    return redirect('recipe_detail', recipe_id=recipe_id)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(user=request.user)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

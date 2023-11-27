@@ -8,3 +8,6 @@ class RecipeExchange(models.Model):
     receiver = models.ForeignKey(User, related_name='receiver', on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     message = models.TextField()
+
+    def __str__(self) -> str:
+        return f"{self.sender.username} to {self.receiver.username}: {self.recipe.title}"

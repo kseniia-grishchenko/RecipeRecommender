@@ -1,9 +1,8 @@
-from django.shortcuts import render
-
 from django.urls import path
-from .views import recipe_exchange
+from .views import RecipeExchangeListCreateView, RecipeExchangeRetrieveUpdateDestroyView
 
 
 urlpatterns = [
-    path('recipe_exchange/', recipe_exchange, name='recipe_exchange'),
+    path('', RecipeExchangeListCreateView.as_view(), name='recipe-exchange-list-create'),
+    path('<int:pk>/', RecipeExchangeRetrieveUpdateDestroyView.as_view(), name='recipe-exchange-retrieve-update-destroy'),
 ]

@@ -1,11 +1,18 @@
-from django.shortcuts import render
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import RecipeExchange, Recipe
-from django.contrib.auth.models import User
+from rest_framework import generics, permissions
+from .models import RecipeExchange
+from .serializers import RecipeExchangeSerializer
 
 
-def recipe_exchange(request):
-    user_profile = User.objects.get(user=request.user)
-    received_exchanges = RecipeExchange.objects.filter(receiver=user_profile)
-    sent_exchanges = RecipeExchange.objects.filter(sender=user_profile)
-    return render(request, 'recipe_exchange.html', {'received_exchanges': received_exchanges, 'sent_exchanges': sent_exchanges})
+class RecipeExchangeListCreateView(generics.ListCreateAPIView):
+    queryset = RecipeExchange.objects.all()
+    serializer_class = RecipeExchangeSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(sender=self.request.user)
+
+
+class RecipeExchangeRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = RecipeExchange.objects.all()
+    serializer_class = RecipeExchangeSerializer
+    permission_classes = [permissions.IsAuthenticated]

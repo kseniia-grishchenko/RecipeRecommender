@@ -1,7 +1,15 @@
-from django.shortcuts import render
+from rest_framework import generics, permissions
 from .models import Ingredient
+from .serializers import IngredientSerializer
 
 
-def ingredient_list(request):
-    ingredients = Ingredient.objects.all()
-    return render(request, 'ingredient_list.html', {'ingredients': ingredients})
+class IngredientListCreateView(generics.ListCreateAPIView):
+    queryset = Ingredient.objects.all()
+    serializer_class = IngredientSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class IngredientRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Ingredient.objects.all()
+    serializer_class = IngredientSerializer
+    permission_classes = [permissions.IsAuthenticated]

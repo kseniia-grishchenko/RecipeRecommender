@@ -1,12 +1,17 @@
-from django.shortcuts import render, get_object_or_404
+from rest_framework import generics, permissions
 from .models import Recipe
+from .serializers import RecipeSerializer
 
 
-def recipe_list(request):
-    recipes = Recipe.objects.all()
-    return render(request, 'recipe_list.html', {'recipes': recipes})
+class RecipeListCreateView(generics.ListCreateAPIView):
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
 
-def recipe_detail(request, recipe_id):
-    recipe = get_object_or_404(Recipe, pk=recipe_id)
-    return render(request, 'recipe_detail.html', {'recipe': recipe})
+class RecipeRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSerializer
