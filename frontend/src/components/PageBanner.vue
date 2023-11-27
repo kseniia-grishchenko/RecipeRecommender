@@ -2,22 +2,24 @@
   <div class="banner">
     <el-image :src="imageUrl"></el-image>
     <div class="shadow-layer">
-      <span class="banner-title">{{ title }}</span>
+      <span class="banner-title">{{ title || defaultTitle }}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data: () => ({
+    defaultTitle:
+      'Unlock the flavors and unleash your culinary creativity with our exquisite recipe collection!'
+  }),
   props: {
     imageUrl: {
       type: String,
       default: 'default_banner.png'
     },
     title: {
-      type: String,
-      default:
-        'Unlock the flavors and unleash your culinary creativity with our exquisite recipe collection!'
+      type: String
     }
   }
 };
