@@ -5,4 +5,4 @@ from .models import FavoriteRecipe
 class FavoriteRecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavoriteRecipe
-        fields = '__all__'
+        fields = ('recipe',)

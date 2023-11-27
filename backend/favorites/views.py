@@ -14,13 +14,13 @@ class FavoriteRecipeListCreateView(generics.ListCreateAPIView):
         return FavoriteRecipe.objects.filter(user=self.request.user)
 
     def create(self, request, *args, **kwargs):
-        existing_favorite = FavoriteRecipe.objects.filter(user=request.user, recipe=request.data.get('recipe'))
+        existing_favorite = FavoriteRecipe.objects.filter(user=self.request.user, recipe_id=request.data.get('recipe'))
         if existing_favorite.exists():
             existing_favorite.delete()
             return Response({'message': 'Рецепт видалено зі списку улюблених'}, status=status.HTTP_204_NO_CONTENT)
 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(user=request.user)
+        serializer.save(user=self.request.user)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
