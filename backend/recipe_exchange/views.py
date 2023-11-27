@@ -6,7 +6,7 @@ from .serializers import RecipeExchangeSerializer
 class RecipeExchangeListCreateView(generics.ListCreateAPIView):
     queryset = RecipeExchange.objects.all()
     serializer_class = RecipeExchangeSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(sender=self.request.user)
