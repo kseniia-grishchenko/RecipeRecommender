@@ -6,11 +6,12 @@
       </el-header>
       <el-main>
         <auth-wrapper></auth-wrapper>
-        <page-banner></page-banner>
+        <page-banner :title="selectedRecipe?.title"></page-banner>
         <sign-up v-if="!user"></sign-up>
         <sign-in v-if="!user" @log-in="handleLogIn"></sign-in>
         <home-page></home-page>
         <recipe-list></recipe-list>
+        <recipe-page @recipe-selected="handleSelectedRecipe"></recipe-page>
       </el-main>
       <el-footer>
         <footer-comp></footer-comp>
@@ -31,12 +32,17 @@ import RecipeList from './views/RecipeList.vue';
 import HomePage from './views/HomePage.vue';
 import PageBanner from './components/PageBanner.vue';
 import AuthWrapper from './AuthWrapper.vue';
+import RecipePage from './views/RecipePage.vue';
 
 export default {
   data: () => ({
-    loggedIn: false
+    loggedIn: false,
+    selectedRecipe: null
   }),
   methods: {
+    handleSelectedRecipe(recipe) {
+      this.selectedRecipe = recipe;
+    },
     async logIn() {
       const accessToken = localStorage.getItem('access');
       if (!accessToken) return;
@@ -58,7 +64,7 @@ export default {
 
         this.user = user;
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     },
 
@@ -110,7 +116,8 @@ export default {
     RecipeList,
     HomePage,
     PageBanner,
-    AuthWrapper
+    AuthWrapper,
+    RecipePage
   }
 };
 </script>
@@ -145,5 +152,9 @@ export default {
 .el-button--primary {
   background-color: var(--main-bg);
   border-color: var(--main-bg);
+}
+
+.el-loading-spinner .path {
+  stroke: var(--main-bg);
 }
 </style>
