@@ -12,7 +12,7 @@ from .serializers import RecipeSerializer
 class RecipeListCreateView(generics.ListCreateAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -23,9 +23,10 @@ class RecipeRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RecipeSerializer
 
     def get(self, request, *args, **kwargs):
-        recipe = self.get_object()
-        RecipeUserView.objects.create(recipe=recipe, user=self.request.user)
-        return super().get(request, *args, **kwargs)
+        if self.request.user:
+            recipe = self.get_object()
+            RecipeUserView.objects.create(recipe=recipe, user=self.request.user)
+            return super().get(request, *args, **kwargs)
 
 
 @api_view(['GET'])
