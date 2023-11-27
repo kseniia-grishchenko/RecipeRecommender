@@ -19,17 +19,15 @@
         </el-form-item>
       </el-form>
       <div class="additional">
-        <span>Forgot password?</span>
-        <el-link @click="openEmailModal">Enter email to reset</el-link>
+        <span>Do not have an account yet? </span>
+        <el-link href="/#/sign-up">Sign up</el-link>
       </div>
     </el-main>
   </el-container>
 </template>
 
 <script>
-import { ElMessage } from 'element-plus';
-import { ElMessageBox } from 'element-plus';
-import { postRequest } from '../api';
+import { postRequest } from '../api.js';
 
 export default {
   data: () => ({
@@ -47,7 +45,6 @@ export default {
   },
   methods: {
     async submitForm() {
-      console.log(this.$refs.authorizationForm);
       try {
         const {
           data: { access, refresh }
@@ -70,20 +67,6 @@ export default {
     },
     hashChangeHandler() {
       this.active = location.hash.match('sign-in');
-    },
-    openEmailModal() {
-      ElMessageBox.prompt('Please input your e-mail', {
-        confirmButtonText: 'OK',
-        cancelButtonText: 'Cancel',
-        inputPattern:
-          /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-        inputErrorMessage: 'Invalid Email'
-      }).then(({ value }) => {
-        ElMessage({
-          type: 'success',
-          message: `Your email is:${value}`
-        });
-      });
     }
   },
   created() {
