@@ -6,7 +6,7 @@ from .serializers import RecipeRatingSerializer
 class RecipeRatingListCreateView(generics.ListCreateAPIView):
     queryset = RecipeRating.objects.all()
     serializer_class = RecipeRatingSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(user_profile=self.request.user)
