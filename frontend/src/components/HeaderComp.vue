@@ -8,6 +8,7 @@
       <el-link href="#/">Home</el-link>
       <el-link href="#/recipes">Recipes</el-link>
       <el-link href="#/profile">Profile</el-link>
+      <el-link href="#/favorites">Favorites</el-link>
     </div>
     <div class="action-section">
       <el-icon v-if="loggedIn"><Star /></el-icon>

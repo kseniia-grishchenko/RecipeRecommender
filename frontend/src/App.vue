@@ -11,6 +11,7 @@
         <sign-in v-if="!user" @log-in="handleLogIn"></sign-in>
         <home-page></home-page>
         <recipe-list></recipe-list>
+        <favorites-page></favorites-page>
         <recipe-page @recipe-selected="handleSelectedRecipe"></recipe-page>
       </el-main>
       <el-footer>
@@ -33,6 +34,7 @@ import HomePage from './views/HomePage.vue';
 import PageBanner from './components/PageBanner.vue';
 import AuthWrapper from './AuthWrapper.vue';
 import RecipePage from './views/RecipePage.vue';
+import FavoritesPage from './views/FavoritesPage.vue';
 
 export default {
   data: () => ({
@@ -117,7 +119,8 @@ export default {
     HomePage,
     PageBanner,
     AuthWrapper,
-    RecipePage
+    RecipePage,
+    FavoritesPage
   }
 };
 </script>

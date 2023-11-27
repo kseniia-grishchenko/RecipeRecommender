@@ -2,7 +2,7 @@ from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import FavoriteRecipe
-from .serializers import FavoriteRecipeSerializer
+from .serializers import FavoriteRecipeSerializer, FavoriteRecipesSerializer
 
 
 class FavoriteRecipeListCreateView(generics.ListCreateAPIView):
@@ -24,3 +24,12 @@ class FavoriteRecipeListCreateView(generics.ListCreateAPIView):
         serializer.save(user=self.request.user)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class FavoriteRecipeListView(generics.ListAPIView):
+    queryset = FavoriteRecipe.objects.all()
+    serializer_class = FavoriteRecipesSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return FavoriteRecipe.objects.filter(user=self.request.user)
