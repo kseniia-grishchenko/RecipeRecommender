@@ -5,17 +5,32 @@
 </template>
 
 <script>
-import recipes from '../assets/data/recipes.js';
+import { getRequest } from '../api.js';
 import RecipeCard from '../components/RecipeCard.vue';
 
 export default {
   data: () => ({
-    recipes,
+    recipes: [],
     active: false
   }),
   methods: {
     hashChangeHandler() {
       this.active = location.hash.match('recipes');
+    },
+    async fetchRecipes() {
+      try {
+        const { data: recipes } = await getRequest('/api/recipes/');
+
+        this.recipes = recipes;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  },
+  watch: {
+    active(active) {
+      if (!active) return;
+      this.fetchRecipes();
     }
   },
   created() {
