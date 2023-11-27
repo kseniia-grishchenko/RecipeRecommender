@@ -5,9 +5,10 @@
         <header-comp :loggedIn="loggedIn"></header-comp>
       </el-header>
       <el-main>
+        <auth-wrapper></auth-wrapper>
         <page-banner></page-banner>
-        <sign-up></sign-up>
-        <sign-in></sign-in>
+        <sign-up v-if="!user"></sign-up>
+        <sign-in v-if="!user" @log-in="handleLogIn"></sign-in>
         <home-page></home-page>
         <recipe-list></recipe-list>
       </el-main>
@@ -19,6 +20,9 @@
 </template>
 
 <script>
+import { jwtDecode } from 'jwt-decode';
+import { getRequest, postRequest } from './api.js';
+
 import SignIn from './views/SignIn.vue';
 import SignUp from './views/SignUp.vue';
 import FooterComp from './components/FooterComp.vue';
@@ -26,11 +30,73 @@ import HeaderComp from './components/HeaderComp.vue';
 import RecipeList from './views/RecipeList.vue';
 import HomePage from './views/HomePage.vue';
 import PageBanner from './components/PageBanner.vue';
+import AuthWrapper from './AuthWrapper.vue';
 
 export default {
   data: () => ({
     loggedIn: false
   }),
+  methods: {
+    async logIn() {
+      const accessToken = localStorage.getItem('access');
+      if (!accessToken) return;
+
+      const { exp } = jwtDecode(accessToken);
+      this.expiresAt = exp;
+
+      if (this.expiresAt * 1e3 > Date.now()) {
+        await this.fetchUser();
+        return;
+      }
+
+      this.refreshToken();
+    },
+
+    async fetchUser() {
+      try {
+        const { data: user } = await getRequest('/api/auth/users/me/');
+
+        this.user = user;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async refreshToken() {
+      try {
+        const { data } = await postRequest('/api/api/token/refresh/', {
+          refresh: localStorage.getItem('refresh')
+        });
+
+        const { access, refresh } = data;
+
+        localStorage.setItem('access', access);
+        localStorage.setItem('refresh', refresh);
+        this.logIn();
+      } catch (err) {
+        console.error(err.response.data);
+      }
+    },
+
+    async handleLogIn() {
+      await this.logIn();
+      location.hash = '#/';
+    }
+  },
+  created() {
+    this.logIn();
+
+    this.refresher = setInterval(() => {
+      if (this.expiresAt && this.expiresAt * 1e3 > Date.now()) return;
+      this.refreshToken();
+    }, 60 * 1e3);
+
+    const hashChangeHandler = () => {
+      this.hash = location.hash;
+    };
+    window.addEventListener('hashchange', hashChangeHandler);
+    hashChangeHandler();
+  },
   components: {
     HeaderComp,
     SignUp,
@@ -38,7 +104,8 @@ export default {
     SignIn,
     RecipeList,
     HomePage,
-    PageBanner
+    PageBanner,
+    AuthWrapper
   }
 };
 </script>
