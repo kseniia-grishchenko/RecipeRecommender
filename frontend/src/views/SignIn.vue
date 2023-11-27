@@ -2,15 +2,20 @@
   <el-container class="sign-in" v-if="active">
     <el-main class="content">
       <h2>Welcome to RecipeRec</h2>
-      <el-form status-icon label-width="120px" class="user-info">
+      <el-form status-icon label-width="120px" class="user-info" ref="authorizationForm">
         <el-form-item label="Username" prop="username">
-          <el-input placeholder="Username" />
+          <el-input placeholder="Username" v-model="form.username" />
         </el-form-item>
         <el-form-item label="Password" prop="pass">
-          <el-input type="password" autocomplete="off" placeholder="Password" />
+          <el-input
+            type="password"
+            autocomplete="off"
+            placeholder="Password"
+            v-model="form.password"
+          />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" class="sign-in-btn">Sign In</el-button>
+          <el-button type="primary" class="sign-in-btn" @click="submitForm">Sign In</el-button>
         </el-form-item>
       </el-form>
       <div class="additional">
@@ -24,10 +29,15 @@
 <script>
 import { ElMessage } from 'element-plus';
 import { ElMessageBox } from 'element-plus';
+import { postRequest } from '../api';
 
 export default {
   data: () => ({
-    active: false
+    active: false,
+    form: {
+      username: '',
+      password: ''
+    }
   }),
   props: {
     loggedIn: {
@@ -36,6 +46,28 @@ export default {
     }
   },
   methods: {
+    async submitForm() {
+      console.log(this.$refs.authorizationForm);
+      try {
+        const {
+          data: { access, refresh }
+        } = await postRequest('/api/api/token/', {
+          username: this.form.username,
+          password: this.form.password
+        });
+
+        localStorage.setItem('access', access);
+        localStorage.setItem('refresh', refresh);
+
+        this.$emit('log-in');
+      } catch (err) {
+        this.$notify.error({
+          title: 'Error occurred',
+          message: JSON.stringify(err.response.data),
+          showClose: false
+        });
+      }
+    },
     hashChangeHandler() {
       this.active = location.hash.match('sign-in');
     },
