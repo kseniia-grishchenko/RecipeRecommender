@@ -1,7 +1,13 @@
 <template>
   <div class="recipe-card">
     <div class="image-container">
-      <img :src="recipe.image" alt="Recipe image" />
+      <el-image :src="recipe.image" fit="contain">
+        <template #error>
+          <div class="image-slot">
+            <img src="default_recipe.jpg" />
+          </div>
+        </template>
+      </el-image>
       <button class="favorite-button">❤️</button>
     </div>
     <div class="content">
