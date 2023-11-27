@@ -1,5 +1,10 @@
 # Recipe Recommender
 
+## Design
+[Figma link](https://www.figma.com/file/Zl5fEh2x30VyPhi3T9jItj/Food-recipes-website-UI---Del%C3%ADcias-%C3%A0-Mesa-(Community)?type=design&node-id=0%3A1&mode=design&t=4z9xTQ2vTItuTz8D-1)
+
+<img width="604" alt="main page" src="https://github.com/kseniia-grishchenko/RecipeRecommender/assets/152200130/58012b27-2df9-4398-a614-e0ccb1839e0f">
+
 ## Backend
 
 ### Installing using Github
