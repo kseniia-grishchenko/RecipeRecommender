@@ -18,6 +18,7 @@
         placeholder="Search..."
         :prefix-icon="Search"
       />
+      <el-button @click="$emit('log-out')">Log out</el-button>
     </div>
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div class="common-layout">
     <el-container>
       <el-header>
-        <header-comp :loggedIn="loggedIn"></header-comp>
+        <header-comp :loggedIn="loggedIn" @log-out="logOut"></header-comp>
       </el-header>
       <el-main>
         <auth-wrapper></auth-wrapper>
@@ -81,6 +81,14 @@ export default {
     async handleLogIn() {
       await this.logIn();
       location.hash = '#/';
+    },
+
+    logOut() {
+      localStorage.removeItem('access');
+      localStorage.removeItem('refresh');
+
+      this.user = null;
+      location.hash = '#/sign-in';
     }
   },
   created() {
