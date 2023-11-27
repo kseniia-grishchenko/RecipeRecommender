@@ -23,9 +23,10 @@ class RecipeRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RecipeSerializer
 
     def get(self, request, *args, **kwargs):
-        recipe = self.get_object()
-        RecipeUserView.objects.create(recipe=recipe, user=self.request.user)
-        return super().get(request, *args, **kwargs)
+        if self.request.user:
+            recipe = self.get_object()
+            RecipeUserView.objects.create(recipe=recipe, user=self.request.user)
+            return super().get(request, *args, **kwargs)
 
 
 @api_view(['GET'])
