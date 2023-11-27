@@ -1,8 +1,12 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .models import FavoriteRecipe
 from .serializers import FavoriteRecipeSerializer, FavoriteRecipesSerializer
+from recipe.models import Recipe
 
 
 class FavoriteRecipeListCreateView(generics.ListCreateAPIView):
@@ -33,3 +37,13 @@ class FavoriteRecipeListView(generics.ListAPIView):
 
     def get_queryset(self):
         return FavoriteRecipe.objects.filter(user=self.request.user)
+
+
+class IsFavoriteRecipeView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk, format=None):
+        user = request.user
+        recipe = get_object_or_404(Recipe, pk=pk)
+        is_favorite = FavoriteRecipe.objects.filter(user=user, recipe=recipe).exists()
+        return Response({"is_favorite": is_favorite})
