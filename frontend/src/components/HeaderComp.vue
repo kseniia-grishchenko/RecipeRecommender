@@ -7,11 +7,10 @@
     <div class="sections">
       <el-link href="#/">Home</el-link>
       <el-link href="#/recipes">Recipes</el-link>
-      <el-link href="#/profile">Profile</el-link>
+      <el-link href="#/my-recipes">Profile</el-link>
       <el-link href="#/favorites">Favorites</el-link>
     </div>
     <div class="action-section">
-      <el-icon v-if="loggedIn"><Star /></el-icon>
       <el-input
         v-model="input2"
         class="search-bar"
@@ -25,14 +24,7 @@
 </template>
 
 <script>
-export default {
-  props: {
-    loggedIn: {
-      type: Boolean,
-      default: false
-    }
-  }
-};
+export default {};
 </script>
 
 <style scoped>

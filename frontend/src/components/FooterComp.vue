@@ -5,10 +5,10 @@
       <span>RecipeRec</span>
     </div>
     <div class="nav-links">
-      <el-link>Home</el-link>
-      <el-link>Profile</el-link>
-      <el-link>Catalog</el-link>
-      <el-link>Favourites</el-link>
+      <el-link href="#/">Home</el-link>
+      <el-link href="#/my-recipes">Profile</el-link>
+      <el-link href="#/recipes">Catalog</el-link>
+      <el-link href="#/favourites">Favourites</el-link>
     </div>
   </div>
 </template>
