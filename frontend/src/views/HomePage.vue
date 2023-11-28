@@ -32,7 +32,7 @@ export default {
       this.recipes = popular
         .map(({ recipe }) => ({
           ...recipe,
-          image: 'http://127.0.0.1:8000' + recipe.image
+          image: 'http://0.0.0.0:8000' + recipe.image
         }))
         .slice(0, 3);
     }

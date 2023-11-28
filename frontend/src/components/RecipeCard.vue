@@ -4,7 +4,7 @@
       <el-image :src="recipe.image" fit="contain">
         <template #error>
           <div class="image-slot">
-            <img src="default_recipe.jpg" />
+            <img :src="defaultRecipeImage" />
           </div>
         </template>
       </el-image>
@@ -22,6 +22,7 @@
 
 <script>
 import { getRequest, postRequest } from '../api.js';
+import defaultRecipeImage from '../../public/default_recipe.jpg';
 
 export default {
   props: {
