@@ -1,5 +1,5 @@
 <template>
-  <div class="recipe-card">
+  <el-card class="recipe-card">
     <div class="image-container">
       <el-image :src="recipe.image" fit="contain">
         <template #error>
@@ -17,7 +17,7 @@
       <p class="description">{{ recipe.description }}</p>
       <button class="more-button" @click="$emit('expand-recipe', recipe.id)">More...</button>
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>
