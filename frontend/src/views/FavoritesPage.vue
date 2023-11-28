@@ -6,6 +6,7 @@
       :recipe="recipe"
       @expand-recipe="handleRecipeRedirect"
     />
+    <div v-if="!recipes.length">No favourites yet</div>
   </el-container>
 </template>
 
