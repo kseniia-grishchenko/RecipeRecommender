@@ -1,5 +1,5 @@
 <template>
-  <el-row class="recipe-card" v-if="active">
+  <el-row class="recipe-card" v-if="active" v-loading="loading">
     <el-col :span="18">
       <div class="ingredients">
         <h2>Ingredients</h2>
@@ -31,7 +31,8 @@ import { getRequest, postRequest } from '../api.js';
 export default {
   data: () => ({
     recipe: null,
-    active: false
+    active: false,
+    loading: false
   }),
   methods: {
     hashChangeHandler() {
@@ -44,12 +45,14 @@ export default {
     },
     async fetchRecipe(id) {
       try {
+        this.loading = true;
         const { data: recipe } = await getRequest(`/api/recipes/${id}/`);
         this.recipe = recipe;
         this.checkIfFavorite(id);
       } catch (err) {
         console.error(err);
       }
+      this.loading = false;
     },
     async checkIfFavorite(id) {
       try {
