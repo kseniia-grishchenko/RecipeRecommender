@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page" v-if="active">
+  <el-container class="home-page" v-if="active" v-loading="loading">
     <h2>Most searched recipes</h2>
     <div class="recipe-list">
       <RecipeCard v-for="recipe in recipes" :key="recipe.id" :recipe="recipe" />
@@ -7,7 +7,7 @@
     <el-button class="go-catalog"
       ><el-link href="#/recipes" class="go-link">Go to catalog</el-link>
     </el-button>
-  </div>
+  </el-container>
 </template>
 
 <script>
@@ -17,14 +17,17 @@ import RecipeCard from '../components/RecipeCard.vue';
 export default {
   data: () => ({
     recipes: [],
-    active: false
+    active: false,
+    loading: false
   }),
   methods: {
     hashChangeHandler() {
       this.active = location.hash.match(/#\/$/);
     },
     async fetchMostSearched() {
+      this.loading = true;
       const { data: popular } = await getRequest('/api/recipes/popular-recipes/');
+      this.loading = false;
 
       this.recipes = popular
         .map(({ recipe }) => ({
