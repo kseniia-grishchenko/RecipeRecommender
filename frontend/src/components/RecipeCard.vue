@@ -22,7 +22,6 @@
 
 <script>
 import { getRequest, postRequest } from '../api.js';
-import defaultRecipeImage from '../../public/default_recipe.jpg';
 
 export default {
   props: {
