@@ -11,17 +11,33 @@
 </template>
 
 <script>
-import recipes from '../assets/data/recipes.js';
+import { getRequest } from '../api.js';
 import RecipeCard from '../components/RecipeCard.vue';
 
 export default {
   data: () => ({
-    recipes: recipes.slice(0, 3),
+    recipes: [],
     active: false
   }),
   methods: {
     hashChangeHandler() {
       this.active = location.hash.match(/#\/$/);
+    },
+    async fetchMostSearched() {
+      const { data: popular } = await getRequest('/api/recipes/popular-recipes/');
+
+      this.recipes = popular
+        .map(({ recipe }) => ({
+          ...recipe,
+          image: 'http://127.0.0.1:8000' + recipe.image
+        }))
+        .slice(0, 3);
+    }
+  },
+  watch: {
+    active(active) {
+      if (!active) return;
+      this.fetchMostSearched();
     }
   },
   created() {
