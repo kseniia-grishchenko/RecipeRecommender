@@ -45,3 +45,12 @@ def recipe_views_count(request):
         result.append({'recipe': recipe_data, 'views_count': views_count})
 
     return Response(result)
+
+
+class UserRecipes(generics.ListAPIView):
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Recipe.objects.filter(author=self.request.user)
