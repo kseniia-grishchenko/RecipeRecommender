@@ -21,7 +21,7 @@ export default {
   }),
   methods: {
     hashChangeHandler() {
-      this.active = location.hash.match(/recipes$/);
+      this.active = location.hash.match(/#\/recipes$/);
     },
     async fetchRecipes() {
       try {
