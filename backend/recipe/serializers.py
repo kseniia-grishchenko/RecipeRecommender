@@ -9,3 +9,11 @@ class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
         fields = '__all__'
+
+
+class RecipeCreateSerializer(serializers.ModelSerializer):
+    ingredients = IngredientNameSerializer(many=True)
+
+    class Meta:
+        model = Recipe
+        exclude = ('author', )
