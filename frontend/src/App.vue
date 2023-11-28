@@ -2,7 +2,7 @@
   <div class="common-layout">
     <el-container>
       <el-header>
-        <header-comp :loggedIn="loggedIn" @log-out="logOut"></header-comp>
+        <header-comp @log-out="logOut"></header-comp>
       </el-header>
       <el-main>
         <auth-wrapper></auth-wrapper>
@@ -13,6 +13,8 @@
         <recipe-list></recipe-list>
         <favorites-page></favorites-page>
         <recipe-page @recipe-selected="handleSelectedRecipe"></recipe-page>
+        <my-recipes></my-recipes>
+        <add-recipe></add-recipe>
       </el-main>
       <el-footer>
         <footer-comp></footer-comp>
@@ -35,11 +37,14 @@ import PageBanner from './components/PageBanner.vue';
 import AuthWrapper from './AuthWrapper.vue';
 import RecipePage from './views/RecipePage.vue';
 import FavoritesPage from './views/FavoritesPage.vue';
+import MyRecipes from './views/MyRecipes.vue';
+import AddRecipe from './views/AddRecipe.vue';
 
 export default {
   data: () => ({
     loggedIn: false,
-    selectedRecipe: null
+    selectedRecipe: null,
+    user: {}
   }),
   methods: {
     handleSelectedRecipe(recipe) {
@@ -120,7 +125,9 @@ export default {
     PageBanner,
     AuthWrapper,
     RecipePage,
-    FavoritesPage
+    FavoritesPage,
+    MyRecipes,
+    AddRecipe
   }
 };
 </script>
