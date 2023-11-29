@@ -1,13 +1,15 @@
-<img width="604" alt="main page" src="https://github.com/kseniia-grishchenko/RecipeRecommender/assets/152200130/7d7bf8e3-77d1-48dc-bd92-242ce263fa84"># Recipe Recommender
+# Recipe Recommender
 
-## Design
+## Running via Docker
 
-[Filma link](<https://www.figma.com/file/Zl5fEh2x30VyPhi3T9jItj/Food-recipes-website-UI---Del%C3%ADcias-%C3%A0-Mesa-(Community)?type=design&node-id=0%3A1&mode=design&t=4z9xTQ2vTItuTz8D-1>)
-<img width="604" alt="main page" src="https://github.com/kseniia-grishchenko/RecipeRecommender/assets/152200130/7256a1fa-0c41-45cc-a4b2-4caa252d79dd">
+1. Install / open Docker
+2. Run ‘docker-compose up –build’ at the terminal
 
-## Backend
+## Running locally
 
-### Installing using Github
+### Backend
+
+#### Installing using Github
 
 Python 3.10+ is a must
 
@@ -26,3 +28,16 @@ Python 3.10+ is a must
 7. Install requirements: `pip install -r requirements.txt`
 8. Make migrations: `python manage.py migrate`
 9. Now you can run it: `python manage.py runserver`
+
+### Frontend
+
+1. Go to the `frontend` folder:
+   `cd frontend`
+2. Install requirements: `npm i`
+3. Run the frontend part: `npm run dev`
+
+### Design
+
+[Figma link](<https://www.figma.com/file/Zl5fEh2x30VyPhi3T9jItj/Food-recipes-website-UI---Del%C3%ADcias-%C3%A0-Mesa-(Community)?type=design&node-id=0%3A1&mode=design&t=4z9xTQ2vTItuTz8D-1>)
+
+<img width="604" alt="main page" src="https://github.com/kseniia-grishchenko/RecipeRecommender/assets/152200130/7256a1fa-0c41-45cc-a4b2-4caa252d79dd">
