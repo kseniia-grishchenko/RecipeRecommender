@@ -3,7 +3,7 @@
 ## Running via Docker
 
 1. Install / open Docker
-2. Run ‘docker-compose up –build’ at the terminal
+2. Run `docker-compose up –build` at the terminal
 
 ## Running locally
 
