@@ -26,5 +26,13 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_HOST=${DB_HOST}
 
+#  frontend:
+#    build: ./frontend
+#    ports:
+#      - "5173:5173"
+#    depends_on:
+#      - web
+
+
 volumes:
   postgres_data:
